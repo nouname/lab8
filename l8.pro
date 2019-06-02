@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
 CONFIG -= app_bundle
-CONFIG -= qt
+QT += network
 CONFIG += c++11
 
 QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage -O0 -std=c++0x

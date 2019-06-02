@@ -1,13 +1,13 @@
-os: linux
-language: cpp
-compiler: gcc
 dist: xenial
-matrix:
-  fast_finish: true
-  include:
-    ### Archlinux QtWebEngine
-    - env: DOCKER=archlinux-webengine QUTE_BDD_WEBENGINE=true
-      services: docker
+language: cpp
+os: linux
+env: QT_BASE=512 VER=6.0 STDFLAGS="-std=c++11 -std=c++14 -std=c++17" BUILD_TYPE=Release
+before_install:
+  - if [ "$QT_BASE" = "512" ]; then sudo add-apt-repository ppa:beineri/opt-qt-5.12.0-xenial -y; fi
+  - sudo apt-get update -qq
+install:
+  - sudo apt-get install libgl1-mesa-dev
+  - if [ "$QT_BASE" = "512" ]; then sudo apt-get install -qq qt512base qt512connectivity qt512multimedia qt512svg qt512translations qt512tools qt512webchannel qt512webengine ; source /opt/qt512/bin/qt512-env.sh ; export QTHOME=/opt/qt512 ; fi
 script:
     - qmake
     - make

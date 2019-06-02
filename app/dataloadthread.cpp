@@ -1,6 +1,5 @@
 #include "dataloadthread.h"
 #include <QImage>
-#include <QJsonValue>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>

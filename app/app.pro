@@ -1,5 +1,5 @@
 QT += qml quick core gui network webengine webenginewidgets
-QMAKE_CXXFLAGS += -Ofast
+QMAKE_CXXFLAGS += -Ofast -std=c++11
 CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

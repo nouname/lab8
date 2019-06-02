@@ -1,7 +1,6 @@
 #ifndef WEBVIEWINTERFACE_H
 #define WEBVIEWINTERFACE_H
 
-#include <QWebEngineView>
 #include "globals.h"
 
 class WebViewInterface : public QObject

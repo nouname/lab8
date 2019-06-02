@@ -24,7 +24,7 @@ SOURCES += datareceiver.cpp \
     loadthread.cpp \
     postloader.cpp \
     profileloader.cpp \
-    dataloadthread.cpp
+    dataloadthread.cpp \
 
 RESOURCES += qml.qrc
 

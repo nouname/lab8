@@ -7,7 +7,7 @@ CONFIG += thread
 CONFIG -= qt
 
 HEADERS += \
-        tst_test.h
+        tst_test.h \
 
 SOURCES += \
-        main.cpp
+        main.cpp \

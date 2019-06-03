@@ -6,6 +6,15 @@ CONFIG -= app_bundle
 CONFIG += thread
 QT += webengine webenginewidgets network
 
+QMAKE_CXXFLAGS += -Wall -Wextra -Werror
+QMAKE_CFLAGS += -Wall -Wextra -Werror
+
+# gcov
+QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+QMAKE_CFLAGS += -fprofile-arcs -ftest-coverage
+
+LIBS += -lgcov
+
 HEADERS += \
     ../app/webviewinterface.h \
     utils.h \
@@ -31,3 +40,5 @@ SOURCES += \
     ../app/post.cpp \
     ../app/loadthread.cpp \
     ../app/dataloadthread.cpp
+
+INCLUDEPATH += ../app

@@ -43,7 +43,7 @@ Window {
         }
         property string appId: "6902140"
         anchors.fill: parent
-        url: "https://oauth.vk.com/authorize?client_id=" + appId + "&display=popup&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends,stories&response_type=token&v=5.52"
+        url: "https://oauth.vk.com/authorize?client_id=" + appId + "&display=popup&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.52"
 
         onUrlChanged: {
             web.error = (token.value = param(url.toString(), "https://oauth.vk.com/blank.html#access_token")) ? no_err : at_err
@@ -52,7 +52,7 @@ Window {
                 vk.saveToken();
             } else {
                 vk.logout(window)
-                url = "https://oauth.vk.com/authorize?client_id=" + appId + "&display=popup&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends,stories&response_type=token&v=5.52";
+                url = "https://oauth.vk.com/authorize?client_id=" + appId + "&display=popup&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.52";
             }
 
             console.log(web.error)

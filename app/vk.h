@@ -15,7 +15,7 @@ public:
     Q_INVOKABLE void saveToken();
     Q_INVOKABLE QString checkAccess(Token *token);
     Q_INVOKABLE Token* getTokenFromFile();
-    Q_INVOKABLE void logout(QWindow *window);
+    Q_INVOKABLE bool logout(QWindow *window);
     Q_INVOKABLE void quit();
 
     VK(QObject* parent = nullptr);

@@ -12,8 +12,8 @@ ProfileLoader::ProfileLoader(QObject *parent) : QObject (parent)
 
 QString ProfileLoader::getUrl() const
 {
-    DataReceiver receiver(nullptr);
-    VK vk(nullptr);
+    DataReceiver receiver;
+    VK vk;
     receiver.setUrl("https://api.vk.com/method/users.get?fields=photo_200&access_token=" + vk.getTokenFromFile()->getValue() + "&v=5.92");
     QByteArray data = receiver.getData();
     QJsonObject root = QJsonDocument::fromJson(data).object();

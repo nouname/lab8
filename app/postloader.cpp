@@ -27,8 +27,8 @@ void PostLoader::setData(Post* data)
 
 void PostLoader::getPosts(int offset)
 {    
-    VK vk(nullptr);
-    DataReceiver receiver(nullptr);
+    VK vk;
+    DataReceiver receiver;
     receiver.setUrl("https://api.vk.com/method/newsfeed.get?filters=post&count=100&start_from=" + QString::number(offset) + "&access_token=" + vk.getTokenFromFile()->getValue() + "&v=5.52");
     QByteArray data = receiver.getData();
     thread = new LoadThread();
@@ -68,5 +68,4 @@ void PostLoader::loaded(QString title, QString avaUrl, QString text, QList<QVari
     post->showThisPost = showThisPost;
     setData(post);
     emit dataChanged();
-
 }

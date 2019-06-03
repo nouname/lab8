@@ -23,19 +23,25 @@ VK::VK(QObject *parent) :
 
 void VK::quit() {
     emit done();
-    QFile file(APP_DIR + ".data");
-    file.remove();
-    file.close();
 }
 
-void VK::logout(QWindow *window) {
+bool VK::logout(QWindow *window) {
+    bool result = true;
     QStringList paths = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
     for (int i = 0; i < paths.size(); i++) {
         QDir dir(paths.at(i) + "/QtWebEngine");
         if (dir.isReadable())
             dir.removeRecursively();
+
+        result *= dir.isEmpty();
     }
+    QFile file(APP_DIR + ".data");
+
+    file.remove();
+    file.close();
     window->close();
+
+    return result * !file.exists();
 }
 
 void VK::setToken(Token* token) {
@@ -66,7 +72,7 @@ Token* VK::getTokenFromFile() {
         data.close();
         return nullptr;
     }
-    QByteArrayList arr = data.readAll().split(DELIMITER);
+    QByteArrayList arr = data.readAll().split('/');
     data.close();
     Token *token = new Token();
     token->setValue(arr[0]);
@@ -74,7 +80,7 @@ Token* VK::getTokenFromFile() {
 }
 
 void VK::saveToken() {
-    QString string = getToken()->getValue() + DELIMITER + "";
+    QString string = getToken()->getValue() + "/";
     QFile data(APP_DIR + ".data");
     data.open(QFile::WriteOnly);
     if(data.isOpen())

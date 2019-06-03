@@ -10,7 +10,7 @@ static const QList<QString> PHOTO_SIZES = {"75", "130", "604", "807", "1280", "2
 static const QString AT_ERR = "access denied";
 static const QString NO_ERR = "no error";
 static const QString DATA_FILE_ERR = "can't fetch data from file";
-static const char DELIMITER = '/';
-static const QString APP_DIR = QDir::currentPath() + DELIMITER;
+static const QString APP_DIR = "";
+static const QString appId = "6902140";
 
 #endif // GLOBALS_H

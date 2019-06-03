@@ -21,7 +21,7 @@ void DataLoadThread::run()
     sourceId = -sourceId;
     showThisPost = true;
 
-    DataReceiver receiver(nullptr);
+    DataReceiver receiver;
     receiver.setUrl("https://api.vk.com/method/groups.getById?group_id=" + QVariant(sourceId).toString() + "&access_token=" + vk.getTokenFromFile()->getValue() + "&v=5.92");
 
     QByteArray groupData = receiver.getData();
@@ -47,8 +47,8 @@ void DataLoadThread::run()
 
             result = url.toString();
             int w = 700;
-            int h = contents.toObject().value("photo").toObject().value("height").toInt() * w /
-                    (double) contents.toObject().value("photo").toObject().value("width").toInt();
+            double h = contents.toObject().value("photo").toObject().value("height").toInt() * w /
+                    contents.toObject().value("photo").toObject().value("width").toInt();
 
             result += "*" + QString::number(h);
             images.append(result);

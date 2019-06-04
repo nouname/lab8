@@ -3,9 +3,9 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include <QWindow>
-#include "utils.h"
 #include "../app/token.h"
 #include "../app/vk.h"
+#include "../app/postloader.h"
 
 using namespace testing;
 
@@ -67,8 +67,19 @@ TEST(utils, saveTokenTest) {
     EXPECT_STREQ(token->getValue().toStdString().c_str(), "123abc");
 }
 
-
-
 /** MODULE VK
  * END
  */
+
+/** MODULE DATALOADER
+ * BEGIN
+ */
+
+/* Data loading tests */
+
+
+TEST(dl, loadData) {
+    PostLoader loader;
+    bool running = loader.getPosts(0);
+    EXPECT_EQ(running, true);
+}

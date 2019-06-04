@@ -12,7 +12,7 @@ public:
     PostLoader(QObject *parent = nullptr);
     void setData(Post *post);
     Post* getData();
-    void getPosts(int offset);
+    bool getPosts(int offset);
     void timeout(int ms);
 
 private:

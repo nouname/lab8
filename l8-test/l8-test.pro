@@ -17,7 +17,6 @@ LIBS += -lgcov
 
 HEADERS += \
     ../app/webviewinterface.h \
-    utils.h \
     ../app/token.h \
     ../app/datareceiver.h \
     ../app/vk.h \
@@ -31,7 +30,6 @@ HEADERS += \
 SOURCES += \
         main.cpp \
     ../app/webviewinterface.cpp \
-    utils.cpp \
     ../app/datareceiver.cpp \
     ../app/token.cpp \
     ../app/vk.cpp \

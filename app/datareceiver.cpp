@@ -1,15 +1,11 @@
 #include "datareceiver.h"
 #include "globals.h"
 #include "webviewinterface.h"
-#include <QApplication>
 #include <QEventLoop>
 #include <QNetworkAccessManager>
-#include <QNetworkDiskCache>
 #include <QNetworkReply>
 #include <QSslConfiguration>
 #include <QTimer>
-
-static QString filename;
 
 DataReceiver::DataReceiver(QObject *parent) :
     QObject (parent)

@@ -2,7 +2,6 @@
 #define GLOBALS_H
 
 #include <QDir>
-#include <QFontDatabase>
 #include <QString>
 #include <QVariant>
 

@@ -1,4 +1,4 @@
- QT += qml quick core gui network webengine webenginewidgets
+QT += qml quick core gui network webengine webenginewidgets
 QMAKE_CXXFLAGS += -Ofast -std=c++11
 CONFIG += c++11
 
@@ -24,7 +24,7 @@ SOURCES += datareceiver.cpp \
     loadthread.cpp \
     postloader.cpp \
     profileloader.cpp \
-    dataloadthread.cpp \
+    dataloadthread.cpp
 
 RESOURCES += qml.qrc
 

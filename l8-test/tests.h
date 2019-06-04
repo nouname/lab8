@@ -29,7 +29,7 @@ TEST(auth, haveAccessTest) {
 
 
 TEST(auth, accessDeniedTest) {
-    QFile file(APP_DIR + "data");
+    QFile file("data");
     file.open(QFile::ReadWrite);
     file.copy("backup");
     VK vk;
@@ -39,17 +39,17 @@ TEST(auth, accessDeniedTest) {
     vk.saveToken();
     QString result = vk.checkAccess(token);
     file.remove();
-    QFile backup(APP_DIR + "backup");
+    QFile backup("backup");
     backup.rename("data");
     EXPECT_STREQ(result.toStdString().c_str(), AT_ERR.toStdString().c_str());
 }
 
 TEST(auth, logoutTest) {
     VK vk;
-    QFile file(APP_DIR + "data");
+    QFile file("data");
     file.copy("backup");
     bool result = vk.logout(new QWindow());
-    QFile backup(APP_DIR + "backup");
+    QFile backup("backup");
     file.remove();
     backup.rename("data");
     EXPECT_TRUE(result);
@@ -70,7 +70,7 @@ TEST(utils, saveTokenTest) {
     VK vk;
     Token *token = new Token;
     token->setValue("123abc");
-    QFile file(APP_DIR + "data");
+    QFile file("data");
     file.open(QFile::ReadWrite);
     file.copy("backup");
 
@@ -78,7 +78,7 @@ TEST(utils, saveTokenTest) {
     vk.saveToken();
 
     token = vk.getTokenFromFile();
-    QFile backup(APP_DIR + "backup");
+    QFile backup("backup");
     file.remove();
     backup.rename("data");
     EXPECT_STREQ(token->getValue().toStdString().c_str(), "123abc");

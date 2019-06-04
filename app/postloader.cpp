@@ -25,7 +25,7 @@ void PostLoader::setData(Post* data)
     this->data = data;
 }
 
-bool PostLoader::getPosts(int offset)
+void PostLoader::getPosts(int offset)
 {    
     VK vk;
     DataReceiver receiver;
@@ -38,8 +38,6 @@ bool PostLoader::getPosts(int offset)
     connect(this, SIGNAL(done()), thread, SLOT(stop()));
     connect(&vk, SIGNAL(done()), thread, SLOT(stop()));
     thread->start();
-
-    return thread->isRunning();
 }
 
 void PostLoader::timeout(int ms)

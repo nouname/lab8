@@ -12,12 +12,12 @@ public:
     PostLoader(QObject *parent = nullptr);
     void setData(Post *post);
     Post* getData();
-    bool getPosts(int offset);
+    void getPosts(int offset);
     void timeout(int ms);
+    LoadThread* thread;
 
 private:
      Post* data;
-     LoadThread* thread;
 
 private slots:
     void loaded(QString title, QString avaUrl, QString text, QList<QVariant>, bool showThisPost);

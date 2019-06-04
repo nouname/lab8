@@ -21,20 +21,37 @@ TEST(auth, loadLoginDataTest) {
     EXPECT_FALSE(token->isEmpty());
 }
 
-TEST(auth, checkAccessTest) {
+TEST(auth, haveAccessTest) {
     VK vk;
     Token *token = vk.getTokenFromFile();
     EXPECT_STREQ(vk.checkAccess(token).toStdString().c_str(), NO_ERR.toStdString().c_str());
 }
 
+
+TEST(auth, accessDeniedTest) {
+    QFile file(APP_DIR + "data");
+    file.open(QFile::ReadWrite);
+    file.copy("backup");
+    VK vk;
+    Token *token = new Token;
+    token->setValue("123abc");
+    vk.setToken(token);
+    vk.saveToken();
+    QString result = vk.checkAccess(token);
+    file.remove();
+    QFile backup(APP_DIR + "backup");
+    backup.rename("data");
+    EXPECT_STREQ(result.toStdString().c_str(), AT_ERR.toStdString().c_str());
+}
+
 TEST(auth, logoutTest) {
     VK vk;
-    QFile file(APP_DIR + ".data");
-    file.copy(".backup");
+    QFile file(APP_DIR + "data");
+    file.copy("backup");
     bool result = vk.logout(new QWindow());
-    QFile backup(APP_DIR + ".backup");
+    QFile backup(APP_DIR + "backup");
     file.remove();
-    backup.rename(".data");
+    backup.rename("data");
     EXPECT_TRUE(result);
 }
 
@@ -53,17 +70,17 @@ TEST(utils, saveTokenTest) {
     VK vk;
     Token *token = new Token;
     token->setValue("123abc");
-    QFile file(APP_DIR + ".data");
+    QFile file(APP_DIR + "data");
     file.open(QFile::ReadWrite);
-    file.copy(".backup");
+    file.copy("backup");
 
     vk.setToken(token);
     vk.saveToken();
 
     token = vk.getTokenFromFile();
-    QFile backup(APP_DIR + ".backup");
+    QFile backup(APP_DIR + "backup");
     file.remove();
-    backup.rename(".data");
+    backup.rename("data");
     EXPECT_STREQ(token->getValue().toStdString().c_str(), "123abc");
 }
 
@@ -77,9 +94,20 @@ TEST(utils, saveTokenTest) {
 
 /* Data loading tests */
 
-
 TEST(dl, loadData) {
     PostLoader loader;
-    bool running = loader.getPosts(0);
-    EXPECT_EQ(running, true);
+    loader.getPosts(0);
+    loader.thread->terminate();
+    EXPECT_TRUE(loader.thread->isRunning());
 }
+
+TEST(dl, setData) {
+    PostLoader loader;
+    loader.getPosts(0);
+    loader.thread->terminate();
+    EXPECT_NE(loader.getData(), nullptr);
+}
+
+/** MODULE DATALOADER
+ * END
+ */

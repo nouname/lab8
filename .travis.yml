@@ -10,6 +10,7 @@ install:
   - sudo apt-get install libgl1-mesa-dev
   - if [ "$QT_BASE" = "512" ]; then sudo apt-get install qt512base qt512webengine ; source /opt/qt512/bin/qt512-env.sh ; export QTHOME=/opt/qt512 ; fi
 script:
+    - cp app/data l8-test/
     - export QT_QPA_PLATFORM=offscreen
     - qmake
     - make 

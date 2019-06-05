@@ -25,6 +25,7 @@ void VK::quit() {
 }
 
 bool VK::logout(QWindow *window) {
+    quit();
     bool result = true;
     QStringList paths = QStandardPaths::standardLocations(QStandardPaths::DataLocation);
     for (int i = 0; i < paths.size(); i++) {
@@ -34,12 +35,9 @@ bool VK::logout(QWindow *window) {
 
         result *= dir.isEmpty();
     }
-    QFile file(APP_DIR + "data");
-
+    QFile file("data");
     file.remove();
-    file.close();
     window->close();
-
     return result && !file.exists();
 }
 
@@ -66,24 +64,21 @@ QString VK::checkAccess(Token *token) {
 }
 
 Token* VK::getTokenFromFile() {
-    QFile data(APP_DIR + "data");
-    bool open = data.open(QFile::ReadOnly);
-    if (!open || data.pos() < 0) {
-        data.close();
+    QFile data("data");
+    data.open(QFile::ReadOnly);
+    if (!data.isOpen())
         return nullptr;
-    }
-    QByteArrayList arr = data.readAll().split('/');
-    data.close();
     Token *token = new Token();
-    token->setValue(arr[0]);
+    token->setValue(data.readAll());
+    data.close();
     return token;
 }
 
 void VK::saveToken() {
-    QString string = getToken()->getValue() + "/";
-    QFile data(APP_DIR + "data");
+    QString string = getToken()->getValue();
+    QFile data("data");
     data.open(QFile::WriteOnly);
     if(data.isOpen())
-       data.write(string.toUtf8());
+       data.write(string.toStdString().c_str());
     data.close();
 }

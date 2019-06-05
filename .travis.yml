@@ -14,6 +14,9 @@ script:
     - export QT_QPA_PLATFORM=offscreen
     - qmake
     - make 
+    # Auto-auth
+    - "./l8-test/util"
+    # Tests
     - "./l8-test/l8-test"
 after_success:
 - coveralls --root . -E ".*external.*" -E ".*tests.*"

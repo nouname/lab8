@@ -5,6 +5,8 @@
 #include <QtWebEngine>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QWebEnginePage>
+#include <QWebEngineProfile>
 
 int main(int argc, char *argv[])
 {

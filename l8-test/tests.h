@@ -18,7 +18,7 @@ using namespace testing;
 TEST(auth, loadLoginDataTest) {
     VK vk;
     Token *token = vk.getTokenFromFile();
-    EXPECT_FALSE(token->isEmpty());
+    EXPECT_NE(token, nullptr);
 }
 
 TEST(auth, haveAccessTest) {

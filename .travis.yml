@@ -1,21 +1,21 @@
 dist: xenial
 language: cpp
 os: linux
-env: QT_BASE=512 VER=6.0 STDFLAGS="-std=c++11 -std=c++14 -std=c++17" BUILD_TYPE=Release
+env: 
+- QT_BASE=512 VER=6.0 STDFLAGS="-std=c++11 -std=c++14 -std=c++17" BUILD_TYPE=Release
 before_install:
   - pip install --user cpp-coveralls
   - if [ "$QT_BASE" = "512" ]; then sudo add-apt-repository ppa:beineri/opt-qt-5.12.0-xenial -y; fi
   - sudo apt-get update -qq
 install:
-  - sudo apt-get install libgl1-mesa-dev libcurl4-openssl-dev
-  - if [ "$QT_BASE" = "512" ]; then sudo apt-get install qt512base qt512webengine ; source /opt/qt512/bin/qt512-env.sh ; export QTHOME=/opt/qt512 ; fi
+  - sudo apt-get install libgl1-mesa-dev *curl*
+  - if [ "$QT_BASE" = "512" ]; then sudo apt-get install qt512webengine ; source /opt/qt512/bin/qt512-env.sh ; export QTHOME=/opt/qt512 ; fi
 script:
-    - cp app/data l8-test/
     - export QT_QPA_PLATFORM=offscreen
-    - qmake
-    - make 
     # Auto-auth
     - "./l8-test/util"
+    - qmake
+    - make 
     # Tests
     - "./l8-test/l8-test"
 after_success:
